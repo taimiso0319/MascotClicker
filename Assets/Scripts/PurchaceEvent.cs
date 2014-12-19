@@ -4,20 +4,20 @@ using System.Collections;
 public class PurchaceEvent : MonoBehaviour {
 
 	public CountManager cManager;
+    private ClickEvent clEvent;
 
 	void Start(){
 		cManager = GetComponent<CountManager>();
+        clEvent = GetComponent<ClickEvent>();
 	}
-	public void Puchace1(){
-		cManager.perSec1++;
-		cManager.sum -= 10;
+    public void Puchace(int buttonNum) {
+        cManager.sum -= cManager.perSecNeedMoney[buttonNum];
+		cManager.perSecCount[buttonNum]++;
+        if(!cManager.isPurchaced[buttonNum]) {
+            cManager.isPurchaced[buttonNum] = true;
+        }
+        cManager.NeedMoneySum(buttonNum);
 	}
-	public void Puchace10(){
-		cManager.perSec10++;
-		cManager.sum -= 100;
-	}
-	public void Puchace100(){
-		cManager.perSec100++;
-		cManager.sum -= 1000;
-	}
+    
+    //clEvent.AddDropList(buttonNum);
 }
