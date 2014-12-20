@@ -10,13 +10,19 @@ public class PurchaceEvent : MonoBehaviour {
 		cManager = GetComponent<CountManager>();
         clEvent = GetComponent<ClickEvent>();
 	}
-    public void Puchace(int buttonNum) {
+    public void CharacterPuchace(int buttonNum) {
         cManager.sum -= cManager.perSecNeedMoney[buttonNum];
 		cManager.perSecCount[buttonNum]++;
-        if(!cManager.isPurchaced[buttonNum]) {
-            cManager.isPurchaced[buttonNum] = true;
+		if(!cManager.isCharacterPurchaced[buttonNum]) {
+			cManager.isCharacterPurchaced[buttonNum] = true;
         }
         cManager.NeedMoneySum(buttonNum);
+	}
+	public void ClickPurchace(int buttonNum){
+		clEvent.AddDropList(buttonNum);
+		cManager.sum -= cManager.clickNeedMoney[buttonNum];
+		cManager.isClickPurchaced[buttonNum] = true;
+		cManager.perClick = cManager.perClickMoney[buttonNum];
 	}
     
     //clEvent.AddDropList(buttonNum);

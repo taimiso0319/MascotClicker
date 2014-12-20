@@ -20,6 +20,7 @@ public class MenuEvent : MonoBehaviour {
 
 	public void MenuClose(){
         menuObject.SetActive(false);
+		menuObjectPage2.SetActive(false);
 	}
 
     public void MenuPageChange() {

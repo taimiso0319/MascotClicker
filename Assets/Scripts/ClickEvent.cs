@@ -12,6 +12,7 @@ public class ClickEvent : MonoBehaviour {
     private AudioSource audioSource;
     private int clickCount = 0;
 
+	
 	// Use this for initialization
 	void Start () {
 		cManager = GetComponent<CountManager>();
@@ -26,10 +27,10 @@ public class ClickEvent : MonoBehaviour {
 		cManager.clickedNum += cManager.perClick;
         randObjNum = Random.Range(0, dropObjectList.Count);
         clickCount++;
-        if(parentObject.transform.childCount < 30 && clickCount == 5) {
+        if(parentObject.transform.childCount <= 30 && clickCount == 5) {
             LocalInstantiate(randObjNum);
             clickCount = 0;
-        }
+		}if(30<parentObject.transform.childCount)clickCount=0;
             audioSource.Play();
 	}
 
