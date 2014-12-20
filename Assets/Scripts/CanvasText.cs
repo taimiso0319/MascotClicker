@@ -11,7 +11,7 @@ public class CanvasText : MonoBehaviour {
 	public CountManager cManager;
 	
 	public GameObject[] buttonObject = new GameObject[3];
-	public Button[] button = new Button[3];
+	private Button[] button = new Button[3];
 
 	void Start(){
 		cManager = GetComponent<CountManager>();
@@ -26,16 +26,16 @@ public class CanvasText : MonoBehaviour {
 	void Update () {
 		if(sumText == null) return;
 		if(aveText == null) return;
-		sumText.text = Mathf.FloorToInt(cManager.sum).ToString();
-		aveText.text = cManager.aveNum.ToString("F2") + "/sec";
-		if(cManager.sum < 10){
-			button[0].interactable = false;
-		}else button[0].interactable = true;
-		if(cManager.sum < 100){
-			button[1].interactable = false;
-		}else button[1].interactable = true;
-		if(cManager.sum < 1000){
-			button[2].interactable = false;
-		}else button[2].interactable = true;
+		sumText.text = Mathf.FloorToInt(cManager.sum).ToString() + "mp";
+		aveText.text = cManager.aveNum.ToString("F2") + "mp/sec";
+        for(int i = 0;i < button.Length;i++) ButtonInteractChange(i);
 	}
+
+    void ButtonInteractChange(int buttonNum) {
+        if(cManager.sum < cManager.perSecNeedMoney[buttonNum]) {
+            button[buttonNum].interactable = false;
+        } else button[buttonNum].interactable = true;
+    }
+
+    
 }
